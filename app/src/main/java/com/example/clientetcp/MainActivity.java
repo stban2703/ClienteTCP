@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                         //Esta linea envia solicitud de conexion
                         //En la seccion del host voy a poner la IP del servidor
                         //En el puerto, voy a poner el puerto en el que escucha el servidor
-                        socket = new Socket("192.168.0.9", 5000);
+                        socket = new Socket("192.168.0.8", 5000);
 
 
                         //------------------------------------------//
@@ -143,9 +143,20 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        accionColor.setOnTouchListener(
-                (v, event) -> {
-                    switch (event.getAction()) {
+        accionColor.setOnClickListener(
+                (v) -> {
+                    new Thread(
+                            () -> {
+
+                                try {
+                                    Thread.sleep(300);
+                                    writer.write("COLOR\n");
+                                    writer.flush();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                    /*switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             isCOLOR = false;
                             break;
@@ -157,9 +168,12 @@ public class MainActivity extends AppCompatActivity {
                             isCOLOR = true;
                             break;
                     }
-                    return true;
-                }
-        );
+                    return true;*/
+                            }
+
+                    ).start();
+                });
+
 
         //Envia mensaje para subir
         new Thread(
@@ -230,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
         ).start();
 
         //Envia mensaje para cambiar color
-        new Thread(
+        /*new Thread(
                 () -> {
                     while (true) {
                         while (isCOLOR) {
@@ -244,6 +258,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }
-        ).start();
+        ).start();*/
     }
 }
