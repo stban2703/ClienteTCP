@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     boolean isDOWN = true;
     boolean isLEFT = true;
     boolean isRIGHT = true;
-    boolean isCOLOR = true;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -144,10 +143,10 @@ public class MainActivity extends AppCompatActivity {
         );
 
         accionColor.setOnClickListener(
+                //Envía mensaje para cambiar el color
                 (v) -> {
                     new Thread(
                             () -> {
-
                                 try {
                                     Thread.sleep(300);
                                     writer.write("COLOR\n");
@@ -155,20 +154,6 @@ public class MainActivity extends AppCompatActivity {
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-
-                    /*switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            isCOLOR = false;
-                            break;
-
-                        case MotionEvent.ACTION_MOVE:
-                            break;
-
-                        case MotionEvent.ACTION_UP:
-                            isCOLOR = true;
-                            break;
-                    }
-                    return true;*/
                             }
 
                     ).start();
@@ -242,22 +227,5 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         ).start();
-
-        //Envia mensaje para cambiar color
-        /*new Thread(
-                () -> {
-                    while (true) {
-                        while (isCOLOR) {
-                        }
-                        try {
-                            Thread.sleep(300);
-                            writer.write("COLOR\n");
-                            writer.flush();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-        ).start();*/
     }
 }
